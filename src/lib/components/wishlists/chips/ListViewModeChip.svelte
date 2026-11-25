@@ -1,6 +1,6 @@
 <script lang="ts">
     import { getFormatter } from "$lib/i18n";
-    import { setListViewPreference } from "$lib/stores/list-view-preference.svelte";
+    import { getListViewPreference, setListViewPreference } from "$lib/stores/list-view-preference.svelte";
     import { SegmentedControl } from "@skeletonlabs/skeleton-svelte";
 
     interface Props {
@@ -10,10 +10,10 @@
     const { isTileView }: Props = $props();
     const t = getFormatter();
 
-    let selectedValue: string | null = $derived(isTileView ? "tile" : "list");
+    let selectedValue: string | null = $derived(isTileView ? "tile" : getListViewPreference());
 
     $effect(() => {
-        if (selectedValue === "list" || selectedValue === "tile") {
+        if (selectedValue === "list" || selectedValue === "tile" || selectedValue === "compact") {
             // Save to localStorage for immediate update
             setListViewPreference(selectedValue);
 
@@ -34,6 +34,17 @@
         >
             <SegmentedControl.ItemText>
                 <iconify-icon class="text-xs" icon="ion:list"></iconify-icon>
+            </SegmentedControl.ItemText>
+            <SegmentedControl.ItemHiddenInput />
+        </SegmentedControl.Item>
+        <SegmentedControl.Item
+            class="w-1"
+            aria-label={$t("wishes.compact-view")}
+            title={$t("wishes.compact-view")}
+            value="compact"
+        >
+            <SegmentedControl.ItemText>
+                <iconify-icon class="text-xs" icon="ion:menu"></iconify-icon>
             </SegmentedControl.ItemText>
             <SegmentedControl.ItemHiddenInput />
         </SegmentedControl.Item>

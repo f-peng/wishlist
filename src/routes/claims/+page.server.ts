@@ -13,7 +13,7 @@ export const load: PageServerLoad = async ({ url, cookies }) => {
     const config = await getConfig(activeMembership.groupId);
 
     // Read view preference from cookie (for SSR to prevent flicker)
-    const viewPreference = cookies.get("listViewPreference") as "list" | "tile" | undefined;
+    const viewPreference = cookies.get("listViewPreference") as "list" | "tile" | "compact" | undefined;
 
     const userIdFilter = decodeMultiValueFilter(url.searchParams.get("users"));
     const items = await client.item.findMany({

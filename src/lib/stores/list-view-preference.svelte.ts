@@ -1,6 +1,6 @@
 import { createContext } from "svelte";
 
-type ListViewPreference = "list" | "tile";
+type ListViewPreference = "list" | "tile" | "compact";
 type ListViewPreferenceState = { value: ListViewPreference };
 
 // Context to share across components

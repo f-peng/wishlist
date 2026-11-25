@@ -53,6 +53,7 @@
     // svelte-ignore state_referenced_locally
     initListViewPreference(data.initialViewPreference);
     let isTileView = $derived(getListViewPreference() === "tile");
+    let isCompact = $derived(getListViewPreference() === "compact");
 
     const flipDurationMs = 200;
     const listAPI = $derived(new ListAPI(data.list.id));
@@ -352,7 +353,9 @@
     <div
         class={isTileView
             ? "grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4"
-            : "flex flex-col space-y-4"}
+            : isCompact
+              ? "flex flex-col space-y-2"
+              : "flex flex-col space-y-4"}
         data-testid="items-container"
         onconsider={handleDnd}
         onfinalize={handleDnd}

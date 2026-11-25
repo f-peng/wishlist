@@ -471,6 +471,7 @@
         "switch-to-list-view": "Passer en vue liste",
         "switch-to-tile-view": "Passer en vue tuile",
         "tile-view": "Vue tuile",
+        "compact-view": "Vue compacte",
         "list-view": "Vue liste",
         "sort-by": "Trier par",
         "group-by": "Regrouper par",

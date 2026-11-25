@@ -55,6 +55,8 @@
     import type { MessageFormatter } from "$lib/server/i18n";
     import GridItemCard from "./GridItemCard.svelte";
     import ListItemCard from "./ListItemCard.svelte";
+    import CompactItemCard from "./CompactItemCard.svelte";
+    import { getListViewPreference } from "$lib/stores/list-view-preference.svelte";
     import type { Snippet } from "svelte";
     import ItemDrawer from "../ItemDrawer.svelte";
 
@@ -84,7 +86,8 @@
         goto(`?item-id=${item.id}`, { replaceState: true, noScroll: true });
     }
 
-    const ItemCard = $derived(isTileView ? GridItemCard : ListItemCard);
+    const isCompact = $derived(getListViewPreference() === "compact");
+    const ItemCard = $derived(isTileView ? GridItemCard : isCompact ? CompactItemCard : ListItemCard);
 </script>
 
 {#snippet defaultImage(t: MessageFormatter, sizeClasses: ClassValue = ["w-24", "h-24", "md:w-40", "md:h-40"])}
